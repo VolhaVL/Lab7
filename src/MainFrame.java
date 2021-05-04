@@ -21,6 +21,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 import javax.swing.GroupLayout.Alignment;
+import javax.swing.JRadioButton;
 import javax.swing.ButtonGroup;
 
 @SuppressWarnings("serial")
@@ -101,7 +102,33 @@ public class MainFrame extends JFrame {
                 sendMessage();
             }
         });
+        ///////////////////////////////////////////////////////////////////////////
+        final ButtonGroup myButtons = new ButtonGroup();
 
+        JRadioButton radio1 = new JRadioButton ("Вкл.",true);
+        myButtons.add (radio1);
+        radio1.addActionListener(new ActionListener() {
+
+
+            public void actionPerformed(ActionEvent e) {
+                if(!turn){
+                    turn = true;
+                    textAreaIncoming.append("Клиент включен" + "\n");
+                    buttonSend.setEnabled(true);}
+            }
+        });
+
+        JRadioButton radio2 = new JRadioButton ("Выкл.",true);
+        myButtons.add (radio2);
+        radio2.addActionListener(new ActionListener() {
+
+            public void actionPerformed(ActionEvent e) {
+                if(turn){
+                    turn = false;
+                    textAreaIncoming.append("Клиент выключен" + "\n");
+                    buttonSend.setEnabled(false);}
+            }
+        });
 
         // Компоновка элементов панели "Сообщение"
         final GroupLayout layout2 = new GroupLayout(messagePanel);
@@ -119,6 +146,8 @@ public class MainFrame extends JFrame {
                                 .addGap(SMALL_GAP)
                                 .addComponent(textFieldTo))
                         .addComponent(scrollPaneOutgoing)
+                        .addComponent(radio1)
+                        .addComponent(radio2)
                         .addComponent(buttonSend))
                 .addContainerGap());
         layout2.setVerticalGroup(layout2.createSequentialGroup()
@@ -133,6 +162,8 @@ public class MainFrame extends JFrame {
                 .addComponent(scrollPaneOutgoing)
                 .addGap(MEDIUM_GAP)
                 .addComponent(buttonSend)
+                .addComponent(radio1)
+                .addComponent(radio2)
                 .addContainerGap());
 
         // Компоновка элементов фрейма
